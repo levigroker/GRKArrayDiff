@@ -23,13 +23,13 @@
     [collectionView performBatchUpdates:^{
         if (self.valid) {
             //Deletes
-            NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
+            NSArray<NSIndexPath *> *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
             if (deletions.count > 0) {
                 [collectionView deleteItemsAtIndexPaths:deletions];
             }
             
             //Insertions
-            NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
+            NSArray<NSIndexPath *> *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
             if (insertions.count > 0) {
                 [collectionView insertItemsAtIndexPaths:insertions];
             }
@@ -41,7 +41,7 @@
                 [collectionView moveItemAtIndexPath:previousIndexPath toIndexPath:currentIndexPath];
             }
             
-            NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
+            NSArray<NSIndexPath *> *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
             if (modifications.count > 0) {
                 [collectionView reloadItemsAtIndexPaths:modifications];
             }

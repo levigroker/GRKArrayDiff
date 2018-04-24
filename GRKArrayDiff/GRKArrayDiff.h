@@ -75,8 +75,8 @@ typedef NS_ENUM(NSUInteger, GRKArrayDiffType) {
  * indicies for the current indcies (moved to, not moved from).
  * @param section  The "section" to use for the index set (in UITableView parlance).
  *
- * @return An array of `NSIndexSet` objects representing the indicies of the specified set, in the given section, or `nil` if the `diffType` was not understood.
+ * @return An array of `NSIndexPath` objects representing the indicies of the specified set, in the given section, or `nil` if the `diffType` was not understood.
  */
-- (nullable NSArray <NSIndexSet *>*)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section;
+- (nullable NSArray <NSIndexPath *>*)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section;
 
 @end

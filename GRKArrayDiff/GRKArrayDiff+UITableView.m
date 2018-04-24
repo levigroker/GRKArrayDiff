@@ -27,14 +27,14 @@
         [tableView beginUpdates];
         
         //Deletes
-        NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
+        NSArray<NSIndexPath *> *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
         if (deletions.count > 0)
         {
             [tableView deleteRowsAtIndexPaths:deletions withRowAnimation:animation];
         }
         
         //Insertions
-        NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
+        NSArray<NSIndexPath *> *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
         if (insertions.count > 0)
         {
             [tableView insertRowsAtIndexPaths:insertions withRowAnimation:animation];
@@ -62,7 +62,7 @@
             
             [CATransaction begin];
             
-            NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
+            NSArray<NSIndexPath *> *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
             if (modifications.count > 0)
             {
                 [tableView reloadRowsAtIndexPaths:modifications withRowAnimation:animation];

@@ -20,63 +20,80 @@
 
 - (void)updateTableView:(UITableView *)tableView section:(NSInteger)section animation:(UITableViewRowAnimation)animation completion:(void(^)(void))completion
 {
-    [CATransaction begin];
-    
-    [tableView beginUpdates];
-    
-    //Deletes
-    NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
-    if (deletions.count > 0)
+    if (self.valid)
     {
-        [tableView deleteRowsAtIndexPaths:deletions withRowAnimation:animation];
-    }
-    
-    //Insertions
-    NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
-    if (insertions.count > 0)
-    {
-        [tableView insertRowsAtIndexPaths:insertions withRowAnimation:animation];
-    }
-    
-    //Moves
-    if (self.moves.count > 0)
-    {
-        for (GRKArrayDiffInfo *diffInfo in self.moves)
+        [CATransaction begin];
+
+        [tableView beginUpdates];
+        
+        //Deletes
+        NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
+        if (deletions.count > 0)
         {
-            NSIndexPath *previousIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypePrevious withSection:section];
-            NSIndexPath *currentIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypeCurrent withSection:section];
-            
-            [tableView moveRowAtIndexPath:previousIndexPath toIndexPath:currentIndexPath];
+            [tableView deleteRowsAtIndexPaths:deletions withRowAnimation:animation];
         }
+        
+        //Insertions
+        NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
+        if (insertions.count > 0)
+        {
+            [tableView insertRowsAtIndexPaths:insertions withRowAnimation:animation];
+        }
+        
+        //Moves
+        if (self.moves.count > 0)
+        {
+            for (GRKArrayDiffInfo *diffInfo in self.moves)
+            {
+                NSIndexPath *previousIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypePrevious withSection:section];
+                NSIndexPath *currentIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypeCurrent withSection:section];
+                
+                [tableView moveRowAtIndexPath:previousIndexPath toIndexPath:currentIndexPath];
+            }
+        }
+        
+        [tableView endUpdates];
+        
+        //Modifications
+        [CATransaction setCompletionBlock: ^{
+            
+            //Reload modified items after all other batch updates so the table view will
+            //not throw an exception about duplicate animations being applied to cells.
+            
+            [CATransaction begin];
+            
+            NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
+            if (modifications.count > 0)
+            {
+                [tableView reloadRowsAtIndexPaths:modifications withRowAnimation:animation];
+            }
+            
+            if (completion)
+            {
+                [CATransaction setCompletionBlock: ^{
+                    completion();
+                }];
+            }
+            
+            [CATransaction commit];
+        }];
+        
+        [CATransaction commit];
     }
-    
-    [tableView endUpdates];
-    
-    //Modifications
-    [CATransaction setCompletionBlock: ^{
-        
-        //Reload modified items after all other batch updates so the table view will
-        //not throw an exception about duplicate animations being applied to cells.
-        
+    else
+    {
         [CATransaction begin];
         
-        NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
-        if (modifications.count > 0)
-        {
-            [tableView reloadRowsAtIndexPaths:modifications withRowAnimation:animation];
-        }
+        [tableView reloadData];
         
-        if (completion)
-        {
+        if (completion) {
             [CATransaction setCompletionBlock: ^{
                 completion();
             }];
         }
         
         [CATransaction commit];
-    }];
-    
-    [CATransaction commit];
+    }
 }
 
 #endif //TARGET_OS_IPHONE

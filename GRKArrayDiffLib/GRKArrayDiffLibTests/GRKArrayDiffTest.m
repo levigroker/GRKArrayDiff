@@ -36,6 +36,7 @@
         return NO;
     }];
 
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -57,6 +58,7 @@
         return NO;
     }];
     
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -78,6 +80,7 @@
         return NO;
     }];
     
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -99,6 +102,7 @@
         return NO;
     }];
     
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -120,6 +124,7 @@
         return NO;
     }];
     
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -141,6 +146,7 @@
         return NO;
     }];
     
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -167,7 +173,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -194,7 +200,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -221,7 +227,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -248,7 +254,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -275,7 +281,7 @@
         return [[currentObj description] isEqualToString:@"one"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -308,7 +314,7 @@
         [[currentObj description] isEqualToString:@"three"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -344,7 +350,7 @@
         [[currentObj description] isEqualToString:@"one"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -380,7 +386,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -416,7 +422,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -451,7 +457,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -478,7 +484,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -503,7 +509,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -530,7 +536,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -555,7 +561,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -582,7 +588,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -607,7 +613,7 @@
         return [[currentObj description] isEqualToString:@"one"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -638,7 +644,7 @@
         [[currentObj description] isEqualToString:@"three"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -672,7 +678,7 @@
         [[currentObj description] isEqualToString:@"one"];
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -708,7 +714,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -742,7 +748,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -777,7 +783,7 @@
         return YES;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -802,7 +808,7 @@
         return NO;
     }];
     
-    
+    XCTAssert(diff.valid, @"unexpectedly invalid diff");
     XCTAssert(diff.deletions != nil, @"deletions unexpectedly `nil`");
     XCTAssert(diff.insertions != nil, @"insertions unexpectedly `nil`");
     XCTAssert(diff.moves != nil, @"moves unexpectedly `nil`");
@@ -812,6 +818,18 @@
     [self compareReceivedDiffs:diff.insertions withExpectedDiffs:expectedInsertions label:@"insertions"];
     [self compareReceivedDiffs:diff.moves withExpectedDiffs:expectedMoves label:@"moves"];
     [self compareReceivedDiffs:diff.modifications withExpectedDiffs:expectedModifications label:@"modifications"];
+}
+
+- (void)test5000
+{
+    NSArray <NSString *>*previousArray = @[@"zero", @"one", @"two", @"three", @"four", @"five", @"six", @"seven", @"eight"];
+    NSArray <NSString *>*currentArray = @[@"zero", @"one", @"two", @"two", @"four", @"five", @"six", @"seven", @"eight"];
+
+    GRKArrayDiff *diff = [[GRKArrayDiff alloc] initWithPreviousArray:previousArray currentArray:currentArray identityBlock:^NSString * (NSString *obj) {
+        return obj;
+    } modifiedBlock:nil];
+    
+    XCTAssert(!diff.valid, @"Non-unique identity considered valid");
 }
 
 - (void)compareReceivedDiffs:(NSSet *)received withExpectedDiffs:(NSArray *)expected label:(NSString *)label

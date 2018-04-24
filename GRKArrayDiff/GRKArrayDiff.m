@@ -14,10 +14,11 @@
 
 @interface GRKArrayDiff ()
 
-@property (nonatomic,strong,readwrite) NSSet *deletions;
-@property (nonatomic,strong,readwrite) NSSet *insertions;
-@property (nonatomic,strong,readwrite) NSSet *moves;
-@property (nonatomic,strong,readwrite) NSSet *modifications;
+@property (nonatomic,strong,readwrite) NSSet <GRKArrayDiffInfo *>*deletions;
+@property (nonatomic,strong,readwrite) NSSet <GRKArrayDiffInfo *>*insertions;
+@property (nonatomic,strong,readwrite) NSSet <GRKArrayDiffInfo *>*moves;
+@property (nonatomic,strong,readwrite) NSSet <GRKArrayDiffInfo *>*modifications;
+@property (nonatomic,assign,readwrite) BOOL valid;
 
 @end
 
@@ -53,7 +54,8 @@
             //Deletion of an element moved all elements with a larger index down.
             [self increment:NO offsets:offsets forOrderedSet:previousIdentities fromIndex:previousIndex.integerValue + 1];
         }
-        self.deletions = [NSSet setWithSet:deletions];
+        
+        _deletions = [NSSet setWithSet:deletions];
         
         //Insertions are those which are in the current set but were not in the previous set
         NSMutableSet *insertions = [NSMutableSet set];
@@ -69,7 +71,8 @@
             //Insertion of an element moved all elements with a larger index up.
             [self increment:YES offsets:offsets forOrderedSet:currentIdentities fromIndex:currentIndex.integerValue + 1];
         }
-        self.insertions = [NSSet setWithSet:insertions];
+        
+        _insertions = [NSSet setWithSet:insertions];
         
         //Moves are those which exist in the previous set, still exist in the current set,
         //and have a changed index not as a result of deletion(s) or insertion(s).
@@ -109,8 +112,15 @@
                 }
             }
         }
-        self.moves = [NSSet setWithSet:moves];
-        self.modifications = [NSSet setWithSet:modifications];
+        
+        _moves = [NSSet setWithSet:moves];
+        _modifications = [NSSet setWithSet:modifications];
+        
+        // Verify that the updates to be performed will be valid with the data model.
+        const BOOL previousIdentitiesValid = previousIdentities.count == previousArray.count;
+        const BOOL currentIdentitiesValid = currentIdentities.count == currentArray.count;
+        const BOOL updatesValid = previousArray.count + insertions.count + -deletions.count == currentArray.count;
+        _valid = previousIdentitiesValid && currentIdentitiesValid && updatesValid;
     }
     
     return self;
@@ -118,7 +128,7 @@
 
 #pragma mark - Implementation
 
-- (NSSet *)diffInfoSetForType:(GRKArrayDiffType)type
+- (nullable NSSet <GRKArrayDiffInfo *>*)diffInfoSetForType:(GRKArrayDiffType)type;
 {
     NSSet *retVal = nil;
     
@@ -143,7 +153,7 @@
     return retVal;
 }
 
-- (NSArray *)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section
+- (nullable NSArray <NSIndexPath *>*)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section
 {
     NSMutableArray *retVal = nil;
     
@@ -195,7 +205,7 @@
 
 #pragma mark - Helpers
 
-- (void)populateIdentityIndex:(NSMutableDictionary **)identityIndex identitySet:(NSMutableOrderedSet **)identitySet forArray:(NSArray *)array withIdentityBlock:(NSString *(^)(id obj))identityBlock
+- (void)populateIdentityIndex:(NSMutableDictionary <NSString *, NSNumber *>**)identityIndex identitySet:(NSMutableOrderedSet <NSString *>**)identitySet forArray:(NSArray *)array withIdentityBlock:(NSString *(^)(id obj))identityBlock
 {
     *identityIndex = [NSMutableDictionary dictionary];
     *identitySet = [NSMutableOrderedSet orderedSetWithCapacity:array.count];
@@ -213,7 +223,7 @@
     }
 }
 
-- (void)increment:(BOOL)increment offsets:(NSMutableDictionary *)offsets forOrderedSet:(NSOrderedSet *)orderedSet fromIndex:(NSUInteger)index
+- (void)increment:(BOOL)increment offsets:(NSMutableDictionary <NSString *, NSNumber *>*)offsets forOrderedSet:(NSOrderedSet <NSString *>*)orderedSet fromIndex:(NSUInteger)index
 {
     NSInteger delta = increment ? 1 : -1;
     

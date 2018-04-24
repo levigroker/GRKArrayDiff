@@ -25,19 +25,24 @@ typedef NS_ENUM(NSUInteger, GRKArrayDiffType) {
 /**
  * A NSSet of `GRKArrayDiffInfo` objects describing the elements which were deleted from the previous array.
  */
-@property (nonnull,nonatomic,strong,readonly) NSSet *deletions;
+@property (nonnull,nonatomic,strong,readonly) NSSet <GRKArrayDiffInfo *>*deletions;
 /**
  * A NSSet of `GRKArrayDiffInfo` objects describing the elements which were inserted into the current array.
  */
-@property (nonnull,nonatomic,strong,readonly) NSSet *insertions;
+@property (nonnull,nonatomic,strong,readonly) NSSet <GRKArrayDiffInfo *>*insertions;
 /**
  * A NSSet of `GRKArrayDiffInfo` objects describing the elements whose indicies changed in the current array from the previous array, but not as a result of deletions or insertions.
  */
-@property (nonnull,nonatomic,strong,readonly) NSSet *moves;
+@property (nonnull,nonatomic,strong,readonly) NSSet <GRKArrayDiffInfo *>*moves;
 /**
  * A NSSet of `GRKArrayDiffInfo` objects describing the elements whose indicies did not change but whose contents are considered modified.
  */
-@property (nonnull,nonatomic,strong,readonly) NSSet *modifications;
+@property (nonnull,nonatomic,strong,readonly) NSSet <GRKArrayDiffInfo *>*modifications;
+/**
+ * A boolean indicating whether the models provided result in valid changes.
+ * A false value indicates one or more objects in a model array produced the same result for the identity.
+ */
+@property (nonatomic,assign,readonly) BOOL valid;
 
 /**
  * Create and populate a new instance of a GRKArrayDiff with the given previous and current arrays, and supporting blocks.
@@ -59,7 +64,7 @@ typedef NS_ENUM(NSUInteger, GRKArrayDiffType) {
  *
  * @return An `NSSet` containing `GRKArrayDiffInfo` objects for the specified type, or `nil` if the `type` was not understood.
  */
-- (nullable NSSet *)diffInfoSetForType:(GRKArrayDiffType)type;
+- (nullable NSSet <GRKArrayDiffInfo *>*)diffInfoSetForType:(GRKArrayDiffType)type;
 
 /**
  * A convenience method to provide `NSIndexSet`s for the indicies of a specified diff set.
@@ -72,6 +77,6 @@ typedef NS_ENUM(NSUInteger, GRKArrayDiffType) {
  *
  * @return An array of `NSIndexSet` objects representing the indicies of the specified set, in the given section, or `nil` if the `diffType` was not understood.
  */
-- (nullable NSArray *)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section;
+- (nullable NSArray <NSIndexSet *>*)indexPathsForDiffType:(GRKArrayDiffType)diffType withSection:(NSInteger)section;
 
 @end

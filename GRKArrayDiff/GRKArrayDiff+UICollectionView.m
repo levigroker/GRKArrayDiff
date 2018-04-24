@@ -18,32 +18,37 @@
 
 #pragma mark - UICollectionView
 
-- (void)updateCollectionView:(UICollectionView *)collectionView section:(NSInteger)section completion:(void(^)(void))completion {
+- (void)updateCollectionView:(UICollectionView *)collectionView section:(NSInteger)section completion:(void(^)(void))completion
+{
     [collectionView performBatchUpdates:^{
-        //Deletes
-        NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
-        if (deletions.count > 0) {
-            [collectionView deleteItemsAtIndexPaths:deletions];
-        }
-        
-        //Insertions
-        NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
-        if (insertions.count > 0) {
-            [collectionView insertItemsAtIndexPaths:insertions];
-        }
-
-        for (GRKArrayDiffInfo *diffInfo in self.moves) {
-            NSIndexPath *previousIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypePrevious withSection:section];
-            NSIndexPath *currentIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypeCurrent withSection:section];
+        if (self.valid) {
+            //Deletes
+            NSArray *deletions = [self indexPathsForDiffType:GRKArrayDiffTypeDeletions withSection:section];
+            if (deletions.count > 0) {
+                [collectionView deleteItemsAtIndexPaths:deletions];
+            }
             
-            [collectionView moveItemAtIndexPath:previousIndexPath toIndexPath:currentIndexPath];
+            //Insertions
+            NSArray *insertions = [self indexPathsForDiffType:GRKArrayDiffTypeInsertions withSection:section];
+            if (insertions.count > 0) {
+                [collectionView insertItemsAtIndexPaths:insertions];
+            }
+            
+            for (GRKArrayDiffInfo *diffInfo in self.moves) {
+                NSIndexPath *previousIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypePrevious withSection:section];
+                NSIndexPath *currentIndexPath = [diffInfo indexPathForIndexType:GRKArrayDiffInfoIndexTypeCurrent withSection:section];
+                
+                [collectionView moveItemAtIndexPath:previousIndexPath toIndexPath:currentIndexPath];
+            }
+            
+            NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
+            if (modifications.count > 0) {
+                [collectionView reloadItemsAtIndexPaths:modifications];
+            }
         }
-
-        NSArray *modifications = [self indexPathsForDiffType:GRKArrayDiffTypeModifications withSection:section];
-        if (modifications.count > 0) {
-            [collectionView reloadItemsAtIndexPaths:modifications];
+        else {
+            [collectionView reloadData];
         }
-        
     } completion:^(BOOL finished) {
         if (completion) {
             completion();

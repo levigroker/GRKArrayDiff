@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GRKArrayDiff"
-  s.version      = "2.1.1"
+  s.version      = "2.2"
   s.summary      = "Provides diffs between two NSArrays with details about deletions, insertions, moves, and modifications."
   s.description  = <<-DESC
 Given two NSArrays, an old and current, GRKArrayDiff will report all deletions, insertions,
@@ -8,7 +8,7 @@ moves, and modifications. This is specifically targeted for array backed data mo
 are used to support Table Views and Collection Views, but is generally applicable as well.
     DESC
   s.homepage     = "https://github.com/levigroker/GRKArrayDiff"
-  s.license      = 'Creative Commons Attribution 3.0 Unported License'
+  s.license      = 'Creative Commons Attribution 4.0 International License'
   s.author       = { "Levi Brown" => "levigroker@gmail.com" }
   s.social_media_url = 'https://twitter.com/levigroker'
   s.source       = { :git => "https://github.com/levigroker/GRKArrayDiff.git", :tag => s.version.to_s }

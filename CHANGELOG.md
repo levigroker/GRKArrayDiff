@@ -5,3 +5,4 @@
                  @kesslermichael - Added a category for updating UICollectionView from the GRKArrayDiff  
 2.2 - 2018/04/24 @gyratorycircus - Allowing GRKArrayDiff to gracefully handle inconsistent model arrays which contain duplicate identities.  
 2.2.1 - 2018/04/24 @levigroker Addressing type issues.
+2.2.2 - 2020/10/27 @levigroker - Minimum deployment version bump to silence Xcode 12 warnings.
